@@ -42,7 +42,7 @@ export default function Header({
             <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
             <div className="flex flex-col">
               <span className="font-black text-base sm:text-lg tracking-tight text-white">
-                ApexCore
+                AxiomBank
               </span>
               <span className="text-[10px] text-emerald-400 font-bold -mt-1 hidden xs:inline tracking-wider uppercase">
                 Bank Portal

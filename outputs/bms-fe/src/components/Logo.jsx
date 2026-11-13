@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * ApexCore Logo Component
+ * AxiomBank Logo Component
  * Derived from Untitled.svg with exact colors:
  * - Brand Accent: #14AE5C
  * - Base Container: #1E1E1E
@@ -11,7 +11,7 @@ import React from 'react';
 export default function Logo({
   className = 'w-9 h-9',
   rounded = 'rounded-xl',
-  title = 'ApexCore Bank Logo',
+  title = 'AxiomBank Logo',
   showGlow = false,
 }) {
   return (

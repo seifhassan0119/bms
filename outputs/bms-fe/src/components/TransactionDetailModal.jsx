@@ -57,7 +57,7 @@ export default function TransactionDetailModal({
   };
 
   const handleCopyReceipt = () => {
-    const text = `ApexCore Bank Transaction #${transaction.id}
+    const text = `AxiomBank Transaction #${transaction.id}
 Type: ${transaction.type.toUpperCase()}
 Amount: ${formatCents(transaction.amount_cents)}
 Status: ${transaction.status.toUpperCase()}

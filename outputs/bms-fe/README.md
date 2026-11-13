@@ -1,4 +1,4 @@
-# ApexCore Bank | Management System (Frontend)
+# AxiomBank | Management System (Frontend)
 
 An enterprise-grade, accessible, role-based React web application designed for the Express + SQLite **Bank Management System API**.
 
@@ -119,7 +119,7 @@ TOTAL VIOLATIONS ACROSS APPLICATION:  0
 
 ## 🎯 Usability Principles & Nielsen's Heuristics Implementation
 
-| Nielsen Heuristic | Implementation in ApexCore Bank |
+| Nielsen Heuristic | Implementation in AxiomBank |
 |---|---|
 | **1. Visibility of System Status** | Real-time pending badges on navigation tabs, search record count announcements ("Showing 5 of 12 accounts"), animated loading spinners on refresh, toast notifications on all async operations, and backend connection monitoring. |
 | **2. Match between System & Real World** | Banking terminology aligns with real-world financial conventions: savings/current accounts, vault reserves, atomic ledger debit/credit, and printable customer receipts. |
@@ -136,6 +136,6 @@ TOTAL VIOLATIONS ACROSS APPLICATION:  0
 
 ## 🔒 Session Security & Persistence
 
-- Authentication persists in `localStorage` under `APEX_USER_SESSION`.
+- Authentication persists in `localStorage` under `AXIOM_USER_SESSION` (with fallback support for `APEX_USER_SESSION`).
 - Staff accounts are managed in `src/utils/staffStorage.js` with initial seed accounts for `admin`, `teller`, and `manager`.
 - Admins can create new staff accounts, toggle activation status, or remove staff members with instantaneous synchronization.

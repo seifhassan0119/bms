@@ -1,5 +1,5 @@
 // Staff account management & authentication storage: Exactly 2 accounts (Teller & Manager)
-const STORAGE_KEY = 'APEX_STAFF_ACCOUNTS';
+const STORAGE_KEY = 'AXIOM_STAFF_ACCOUNTS';
 
 export const DEFAULT_STAFF = [
   {
@@ -24,7 +24,10 @@ export const DEFAULT_STAFF = [
 
 export function getStaffList() {
   try {
-    const data = localStorage.getItem(STORAGE_KEY);
+    let data = localStorage.getItem(STORAGE_KEY);
+    if (!data) {
+      data = localStorage.getItem('APEX_STAFF_ACCOUNTS');
+    }
     if (!data) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_STAFF));
       return DEFAULT_STAFF;

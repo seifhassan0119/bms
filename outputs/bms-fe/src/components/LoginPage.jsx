@@ -55,7 +55,7 @@ export default function LoginPage({ onLoginSuccess }) {
             </div>
             <div>
               <h1 id="signin-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                ApexCore Bank
+                AxiomBank
               </h1>
               <p className="text-xs sm:text-sm text-slate-400 mt-1">Staff Portal & Request Processing</p>
             </div>

@@ -16,7 +16,7 @@ export default function App() {
   // User Session State: { id, username, name, role: 'teller'|'manager', status }
   const [user, setUser] = useState(() => {
     try {
-      const saved = localStorage.getItem('APEX_USER_SESSION');
+      const saved = localStorage.getItem('AXIOM_USER_SESSION') || localStorage.getItem('APEX_USER_SESSION');
       if (!saved) return null;
       const parsed = JSON.parse(saved);
       // Automatically migrate legacy 'admin' or invalid session roles to manager
@@ -28,7 +28,7 @@ export default function App() {
           role: 'manager',
           status: 'active',
         };
-        localStorage.setItem('APEX_USER_SESSION', JSON.stringify(migrated));
+        localStorage.setItem('AXIOM_USER_SESSION', JSON.stringify(migrated));
         return migrated;
       }
       return parsed;
@@ -108,13 +108,13 @@ export default function App() {
   // Dynamic Document Title for WCAG 2.1 AA Page Identification
   useEffect(() => {
     if (!user) {
-      document.title = 'ApexCore Bank | Sign In';
+      document.title = 'AxiomBank | Sign In';
     } else {
       const pageTitles = {
         dashboard: `${(user.role || 'Bank').toUpperCase()} Dashboard`,
         operations: 'Requests & Ledger',
       };
-      document.title = `ApexCore Bank | ${pageTitles[activePage] || 'Portal'}`;
+      document.title = `AxiomBank | ${pageTitles[activePage] || 'Portal'}`;
     }
   }, [user, activePage]);
 
@@ -181,12 +181,13 @@ export default function App() {
   // User login & logout
   const handleLoginSuccess = (userInfo) => {
     setUser(userInfo);
-    localStorage.setItem('APEX_USER_SESSION', JSON.stringify(userInfo));
+    localStorage.setItem('AXIOM_USER_SESSION', JSON.stringify(userInfo));
     addToast('Authenticated', `Signed in as ${userInfo.name} (${userInfo.role.toUpperCase()}).`, 'success');
   };
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem('AXIOM_USER_SESSION');
     localStorage.removeItem('APEX_USER_SESSION');
     addToast('Signed Out', 'Your session has been terminated.', 'info');
   };
@@ -420,7 +421,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <Logo className="w-5 h-5 rounded-md" />
-            <span className="font-bold text-slate-300">ApexCore Bank</span>
+            <span className="font-bold text-slate-300">AxiomBank</span>
             <span>&bull;</span>
             <span className="hidden sm:inline">Enterprise Account Management System</span>
           </div>
