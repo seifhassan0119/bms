@@ -10,7 +10,7 @@ export default defineConfig({
       '/api': {
         target: 'https://api.axiombank.site',
         changeOrigin: true,
-        secure: false
+        secure: true
       }
     }
   }

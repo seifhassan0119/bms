@@ -1,12 +1,24 @@
-const getBaseUrl = () => {
-  return localStorage.getItem('BANK_API_BASE_URL') || '';
+const DEFAULT_API_BASE_URL = 'https://api.axiombank.site';
+
+export const getBaseUrl = () => {
+  const customUrl = localStorage.getItem('BANK_API_BASE_URL') || localStorage.getItem('AXIOM_API_BASE_URL');
+  if (customUrl && !customUrl.includes('localhost') && !customUrl.includes('127.0.0.1')) {
+    return customUrl.replace(/\/+$/, '');
+  }
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '');
+  }
+  return DEFAULT_API_BASE_URL;
 };
 
 export const setBaseUrl = (url) => {
   if (url) {
-    localStorage.setItem('BANK_API_BASE_URL', url.replace(/\/+$/, ''));
+    const clean = url.replace(/\/+$/, '');
+    localStorage.setItem('BANK_API_BASE_URL', clean);
+    localStorage.setItem('AXIOM_API_BASE_URL', clean);
   } else {
     localStorage.removeItem('BANK_API_BASE_URL');
+    localStorage.removeItem('AXIOM_API_BASE_URL');
   }
 };
 

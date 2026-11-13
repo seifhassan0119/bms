@@ -1,9 +1,29 @@
+
 const express = require('express');
+const cors = require('cors');
+
 const accountsRouter = require('./routes/accounts');
 const transactionsRouter = require('./routes/transactions');
 const dashboardRouter = require('./routes/dashboard');
 
 const app = express();
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow non-browser requests or any of the bank's domains & localhost
+    if (
+      !origin ||
+      origin.includes('localhost') ||
+      origin.includes('127.0.0.1') ||
+      origin.endsWith('.vercel.app') ||
+      origin.endsWith('axiombank.site')
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 
@@ -43,7 +63,7 @@ const PORT = process.env.PORT || 3000;
 
 if (require.main === module) {
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Bank API listening on port ${PORT}`);
+    console.log(`Bank API listening at http://localhost:${PORT}`);
   });
 }
 
