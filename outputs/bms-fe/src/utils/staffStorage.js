@@ -1,22 +1,13 @@
-// Staff account management & authentication storage: Exactly 2 accounts (Teller & Manager)
+// Staff account management & authentication storage: Single Manager Role
 const STORAGE_KEY = 'AXIOM_STAFF_ACCOUNTS';
 
 export const DEFAULT_STAFF = [
-  {
-    id: 'staff-teller',
-    username: 'teller',
-    password: 'teller123',
-    name: 'Teller',
-    role: 'teller', // Makes the requests (submits account applications & money requests)
-    status: 'active',
-    createdAt: '2026-01-01',
-  },
   {
     id: 'staff-manager',
     username: 'manager',
     password: 'manager123',
     name: 'Manager',
-    role: 'manager', // Accepts / approves requests (reviews account applications & transactions)
+    role: 'manager',
     status: 'active',
     createdAt: '2026-01-01',
   },
@@ -24,19 +15,15 @@ export const DEFAULT_STAFF = [
 
 export function getStaffList() {
   try {
-    let data = localStorage.getItem(STORAGE_KEY);
-    if (!data) {
-      data = localStorage.getItem('APEX_STAFF_ACCOUNTS');
-    }
+    let data = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('APEX_STAFF_ACCOUNTS');
     if (!data) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_STAFF));
       return DEFAULT_STAFF;
     }
     const parsed = JSON.parse(data);
     if (Array.isArray(parsed)) {
-      // Keep strictly the 2 designated accounts (teller and manager)
-      const filtered = parsed.filter((s) => s.role === 'teller' || s.role === 'manager');
-      if (filtered.length === 2) return filtered;
+      const filtered = parsed.filter((s) => s.role === 'manager');
+      if (filtered.length > 0) return filtered;
     }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_STAFF));
     return DEFAULT_STAFF;
@@ -59,7 +46,6 @@ export function authenticateStaff(username, password) {
     throw new Error('This account is currently disabled.');
   }
 
-  // Return user info without exposing password
   const { password: _, ...userSafe } = found;
   return userSafe;
 }

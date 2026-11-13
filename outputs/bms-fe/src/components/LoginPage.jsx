@@ -4,8 +4,8 @@ import { authenticateStaff } from '../utils/staffStorage';
 import Logo from './Logo';
 
 export default function LoginPage({ onLoginSuccess }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('manager');
+  const [password, setPassword] = useState('manager123');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -57,7 +57,7 @@ export default function LoginPage({ onLoginSuccess }) {
               <h1 id="signin-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-white">
                 AxiomBank
               </h1>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Staff Portal & Request Processing</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Manager Portal</p>
             </div>
           </div>
 

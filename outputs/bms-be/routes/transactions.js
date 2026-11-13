@@ -18,7 +18,12 @@ function accountId(value) {
 router.post('/requests', (req, res) => {
   const body = req.body || {};
   const type = typeof body.type === 'string' ? body.type.toLowerCase() : '';
-  const amountCents = centsFrom(body.amount);
+  let amountCents = null;
+  if (Number.isInteger(body.amount_cents) && body.amount_cents > 0) {
+    amountCents = body.amount_cents;
+  } else {
+    amountCents = centsFrom(body.amount);
+  }
   const fromId = body.from_account_id == null ? null : accountId(body.from_account_id);
   const toId = body.to_account_id == null ? null : accountId(body.to_account_id);
   if (!['deposit', 'withdrawal', 'transfer'].includes(type)) return res.status(400).json({ error: 'Type must be deposit, withdrawal, or transfer.' });
